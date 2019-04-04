@@ -1,0 +1,10 @@
+---
+- name: template elasticsearch conf
+  template:
+    src: "elasticsearch/elasticsearch.j2"
+    dest: /etc/elasticsearch/elasticsearch.yml
+
+- name: copy systemctl
+  copy:
+    src: "{{ role_path }}/files/system/elasticsearch.service"
+    dest: /usr/lib/systemd/system/

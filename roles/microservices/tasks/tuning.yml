@@ -1,0 +1,10 @@
+---
+- name: copy security/limits.d
+  copy:
+    src: "{{ role_path }}/files/limits.d/30-tuning.conf"
+    dest: /etc/security/limits.d/
+
+- name: copy sysctl tuning.conf
+  copy:
+    src: "{{ role_path }}/files/sysctl.d/tuning.conf"
+    dest: /etc/sysctl.d/

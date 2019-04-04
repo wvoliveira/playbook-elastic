@@ -1,0 +1,21 @@
+---
+- hosts: microservices_master
+  roles:
+    - microservices
+  vars:
+    node_master: "true"
+    node_data: "false"
+
+- hosts: microservices_data
+  roles:
+    - microservices
+  vars:
+    node_master: "false"
+    node_data: "true"
+
+- hosts: microservices_proxy
+  roles:
+    - microservices
+  vars:
+    node_master: "false"
+    node_data: "false"

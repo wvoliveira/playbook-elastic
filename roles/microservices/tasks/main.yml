@@ -1,0 +1,3 @@
+- import_tasks: elasticsearch.yml
+- import_tasks: tuning.yml
+- import_tasks: check_mk.yml

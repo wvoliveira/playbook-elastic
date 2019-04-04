@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#
+# Check Elasticsearch cluster
+#
+
+NAME="check_elastic_cluster"
+HEALTH=$(curl -s http://{{ ansible_default_ipv4.address }}:9200/_cluster/health)
+STATUS=$(echo "$HEALTH" | python -c "import sys, json; print(json.load(sys.stdin)['status'])")
+
+
+#echo "HEALTH: $HEALTH"
+#echo "STATUS: $STATUS"
+
+if [[ "$STATUS" == "green" ]]; then
+  echo "0 ${NAME} - It's green! Relax bro!"
+elif [[ "$STATUS" == "yellow" ]]; then
+  echo "1 ${NAME} - Ei, pode ser que algum node esteja fora do cluster. Check!"
+elif [[ "$STATUS" == "red" ]]; then
+  echo "2 ${NAME} - Vixi, pode ser que metade do cluster esteja fora ou disco cheio, sei lá. Verifica aí!"
+else
+  echo "2 ${NAME} - Status do cluster: ${STATUS} - Verifique!"
+fi

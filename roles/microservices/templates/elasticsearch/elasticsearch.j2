@@ -1,0 +1,29 @@
+# Ansible file
+# Please, dont manually edit!
+
+cluster.name: microservices
+
+node.name: ${HOSTNAME}
+node.master: {{ node_master }}
+node.data: {{ node_data }}
+
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+
+bootstrap.memory_lock: true
+
+network.host: _site_
+
+http.port: 9200
+
+discovery.zen.ping.unicast.hosts:
+ - x.x.x.x
+ - x.x.x.x
+ - x.x.x.x
+ - x.x.x.x
+
+discovery.zen.minimum_master_nodes: 2
+
+gateway.recover_after_nodes: 2
+
+action.destructive_requires_name: true

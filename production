@@ -1,0 +1,16 @@
+[microservices_master]
+elastic-master01.servers
+elastic-master02.servers
+elastic-master03.servers
+
+[microservices_data]
+elastic-data01.servers
+elastic-data02.servers
+elastic-data03.servers
+elastic-data04.servers
+elastic-data05.servers
+
+[microservices_proxy]
+elastic-proxy01.servers
+elastic-proxy02.servers
+elastic-proxy03.servers

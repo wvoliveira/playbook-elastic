@@ -1,0 +1,30 @@
+---
+- name: xinetd - install
+  yum:
+    name: xinetd
+    state: present
+
+- name: check_mk - install
+  yum:
+    name: https://<check_mk_host>/monitoramento/check_mk/agents/check-mk-agent-1.2.8p27-1.noarch.rpm
+    state: present
+    validate_certs: no
+
+- name: check_mk - conf
+  copy:
+    src: "files/xinetd.d/check_mk"
+    dest: /etc/xinetd.d/check_mk
+  notify:
+    - restart xinetd
+
+- name: check_mk - local check - service
+  copy:
+    src: "files/check_mk/check_elastic_service.sh"
+    dest: /usr/lib/check_mk_agent/local/check_elastic_service.sh
+    mode: 0755
+
+- name: check_mk - local check - cluster health
+  template:
+    src: "check_mk/check_elastic_cluster.j2"
+    dest: /usr/lib/check_mk_agent/local/check_elastic_cluster.sh
+    mode: 0755
